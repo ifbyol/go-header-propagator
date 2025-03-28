@@ -29,7 +29,7 @@ func (p *Propagator) Middleware(next http.Handler) http.Handler {
 func (p *Propagator) RoundTrip(req *http.Request) (*http.Response, error) {
 	req = req.Clone(req.Context())
 
-	if val := req.Context().Value(p.Header); val != nil {
+	if val := req.Context().Value(ctxKey{}); val != nil {
 		req.Header.Set(p.Header, val.(string))
 	}
 
